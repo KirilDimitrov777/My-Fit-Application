@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head('Trainer Dashboard')}"></head>
+<body class="dark-body">
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="dashboard-container">
+    <h1 class="main-title">Trainer Dashboard</h1>
+
+    <div th:if="${assignments.isEmpty()}">
+        <p>No clients yet.</p>
+    </div>
+
+    <div class="client-list" th:each="a : ${assignments}">
+        <div class="dark-card">
+            <h3 th:text="${a.client.fullName}"></h3>
+            <p><strong>Status:</strong> <span th:text="${a.status}"></span></p>
+            <p><strong>Client Note:</strong> <span th:text="${a.clientNoteToTrainer}"></span></p>
+
+            <!-- Accept / Remove buttons -->
+            <div th:if="${a.status == 'NEW'}">
+                <form th:action="@{|/trainer/accept/${a.id}|}" method="post">
+                    <button class="btn neon">Accept</button>
+                </form>
+                <form th:action="@{|/trainer/remove/${a.id}|}" method="post" style="margin-top:5px;">
+                    <button class="btn danger">Remove</button>
+                </form>
+            </div>
+
+            <!-- When ACTIVE -->
+            <div th:if="${a.status == 'ACTIVE'}">
+                <a th:href="@{|/trainer/client/${a.id}|}" class="btn neon">View Client</a>
+                <a th:href="@{|/trainer/client/${a.id}/photos|}" class="btn neon" style="margin-top:5px;">📸 Photos</a>
+
+                <!-- ✅ CHAT BUTTON -->
+                <a th:href="@{|/trainer/chat/${a.id}|}" class="btn neon" style="margin-top:5px;">
+                    💬 Chat
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

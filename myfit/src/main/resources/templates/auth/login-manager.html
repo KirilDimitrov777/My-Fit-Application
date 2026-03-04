@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head('Manager Login')"></head>
+<body class="dark-body">
+<div class="form-container">
+    <h2 class="main-title">Manager Login</h2>
+
+    <form th:action="@{/perform-login}" method="post">
+        <input type="email" name="username" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit" class="btn neon">Login</button>
+    </form>
+
+    <a href="/" class="link" style="display:block;margin-top:1rem;">⬅ Back to home</a>
+</div>
+</body>
+</html>

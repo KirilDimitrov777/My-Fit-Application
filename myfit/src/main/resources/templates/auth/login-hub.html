@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head('MyFit – Transform Your Body')}"></head>
+
+<body class="dark-body landing-page">
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<header class="hero" id="top">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+        <p class="badge">ELITE ONLINE COACHING</p>
+
+        <h1 class="hero-title">
+            Build <span>muscle</span>, burn <span>fat</span>, stay <span>consistent</span>.
+        </h1>
+
+        <p class="hero-subtitle">
+            Personalized programs, direct contact with your trainer and a clean, focused dashboard –
+            all in one platform.
+        </p>
+
+        <div class="hero-actions">
+            <a href="/client/register" class="btn neon btn-big">Start as Client</a>
+            <a href="#roles" class="btn btn-outline">I already have an account</a>
+        </div>
+
+        <!-- 📊 DYNAMIC STATS -->
+        <div class="hero-stats">
+            <div class="stat">
+                <span class="stat-number"
+                      th:text="${activeClients}"
+                      th:attr="data-target=${activeClients}">0</span>
+                <span class="stat-label">Active Clients</span>
+            </div>
+
+            <div class="stat">
+                <span class="stat-number"
+                      th:text="${onlineTrainers}"
+                      th:attr="data-target=${onlineTrainers}">0</span>
+                <span class="stat-label">Online Trainers</span>
+            </div>
+
+            <div class="stat">
+                <span class="stat-number"
+                      th:text="${averageRating}"
+                      th:attr="data-target=${averageRating}">0</span>
+                <span class="stat-label">Average Rating</span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="about" class="section reveal">
+    <div class="about-layout">
+
+        <div class="about-text">
+            <h2>Why MyFit works</h2>
+            <p>
+                MyFit is built for real trainers and real clients – not generic PDFs.
+            </p>
+            <ul class="feature-list">
+                <li><span>🎯</span> Smart onboarding questionnaire</li>
+                <li><span>📲</span> Client dashboard and progress tracking</li>
+                <li><span>💬</span> Built-in chat</li>
+                <li><span>📊</span> Manager view for trainers</li>
+            </ul>
+        </div>
+
+        <div class="about-media">
+            <div class="about-card">
+                <div class="about-avatar"></div>
+                <p class="about-quote">
+                    „Discipline beats motivation. My job is to make discipline simple and visual for you.“
+                </p>
+                <p class="about-name">Your future trainer</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section id="roles" class="section section-dark reveal">
+
+    <div class="section-header">
+        <h2>Login to your space</h2>
+        <p>Choose your role.</p>
+    </div>
+
+    <div class="roles-grid">
+        <div class="role-card">
+            <h3>Manager</h3>
+            <p>Manage trainers and performance.</p>
+            <a href="/login/manager" class="btn btn-small neon-soft">Login as Manager</a>
+        </div>
+
+        <div class="role-card">
+            <h3>Trainer</h3>
+            <p>Update client programs and follow progress.</p>
+            <a href="/login/trainer" class="btn btn-small neon-soft">Login as Trainer</a>
+        </div>
+
+        <div class="role-card">
+            <h3>Client</h3>
+            <p>Access workouts, chat and progress photos.</p>
+            <a href="/login/client" class="btn btn-small neon-soft">Login as Client</a>
+        </div>
+    </div>
+
+    <p class="register-text">
+        New here? <a href="/client/register" class="link">Create client account</a>
+    </p>
+</section>
+
+<footer class="footer">
+    <p>© MyFit Coaching Platform</p>
+</footer>
+
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

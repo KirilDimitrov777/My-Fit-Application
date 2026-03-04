@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head('Chat')"></head>
+<body class="dark-body">
+
+<div class="chat-container">
+    <h2 class="chat-title">Chat with your Trainer</h2>
+
+    <!-- История от базата -->
+    <div id="chatBox" class="chat-box">
+        <div th:each="m : ${messages}"
+             th:class="'msg ' + (${m.sender} == 'CLIENT' ? 'msg-right' : 'msg-left')">
+            <div class="bubble">
+                <span th:text="${m.text}"></span>
+            </div>
+            <div class="time"
+                 th:text="${#temporals.format(m.timestamp, 'HH:mm dd.MM')}"></div>
+        </div>
+    </div>
+
+    <!-- Класическа POST форма (ползва /client/chat/send от ClientController) -->
+    <form th:action="@{/client/chat/send}" method="post"
+          class="chat-input" style="display:flex;gap:10px;margin-top:10px;">
+        <input type="hidden" name="clientId" th:value="${clientId}">
+        <input type="hidden" name="trainerId" th:value="${trainerId}">
+
+        <input type="text" name="text" class="input"
+               placeholder="Type a message..." required>
+        <button class="btn neon" type="submit">Send</button>
+    </form>
+
+    <a th:href="@{|/client/dashboard?clientId=${clientId}|}"
+       class="btn back-btn" style="margin-top:10px;">⬅ Back</a>
+</div>
+
+<!-- Auto scroll до долу при отваряне -->
+<script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        const box = document.getElementById('chatBox');
+        if (box) {
+            box.scrollTop = box.scrollHeight;
+        }
+    });
+</script>
+
+</body>
+</html>

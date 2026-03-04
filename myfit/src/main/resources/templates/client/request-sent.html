@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head('Благодаря!')}"></head>
+<body class="page-bg">
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<section class="center-card">
+    <div class="form-card">
+        <h2>Thank you for using MyFit 🙌</h2>
+        <p class="muted">
+            Your data has been sent to our trainers. Expect feedback soon!
+        </p>
+
+        <a class="btn-secondary fullwidth" th:href="@{/}">
+            Back
+        </a>
+    </div>
+</section>
+
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

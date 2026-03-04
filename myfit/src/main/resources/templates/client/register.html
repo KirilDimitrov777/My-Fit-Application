@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head('Register')}"></head>
+<body class="dark-body">
+<div class="form-container">
+    <h2>Register as Client</h2>
+
+    <form th:action="@{/client/register}" method="post">
+        <input type="text" name="fullName" placeholder="Full Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="phone" placeholder="Phone" required>
+
+        <input type="password" name="password" placeholder="Choose a password" required>
+
+        <button type="submit" class="btn neon">Next</button>
+    </form>
+</div>
+</body>
+</html>

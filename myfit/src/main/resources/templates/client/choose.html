@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head('Choose Trainer')}"></head>
+<body class="dark-body">
+
+<div class="dashboard-container">
+    <h2 class="main-title">Choose Your Trainer</h2>
+
+    <div th:if="${#lists.isEmpty(trainers)}" class="no-trainers">
+        <p>No trainers are available at the moment. Please check again later.</p>
+    </div>
+
+    <div class="trainer-grid"
+         style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;"
+         th:if="${!#lists.isEmpty(trainers)}">
+        <div class="trainer-card dark-card" th:each="t : ${trainers}">
+            <h3 th:text="${t.fullName}">Trainer Name</h3>
+            <p><strong>Specialty:</strong> <span th:text="${t.role}"></span></p>
+            <p><strong>Rate:</strong> <span th:text="${t.salary}"></span></p>
+
+            <form th:action="@{'/client/choose/' + ${t.id}}" method="post">
+                <input type="hidden" name="clientId" th:value="${clientId}">
+                <textarea name="note" placeholder="Message to trainer..." required></textarea>
+                <button class="btn neon small" type="submit" style="margin-top:0.5rem;">
+                    Send Request
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

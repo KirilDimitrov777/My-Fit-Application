@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head('Client Details')"></head>
+<body class="dark-body">
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<main class="dashboard-container client-details-page">
+
+    <!-- Header / breadcrumb -->
+    <header class="page-header">
+        <div class="breadcrumbs">
+            <a th:href="@{/trainer/dashboard}">Trainer Dashboard</a>
+            <span>/</span>
+            <span>Client Details</span>
+        </div>
+        <h1 class="main-title">Client Details</h1>
+    </header>
+
+    <!-- Основна карта с информация за клиента -->
+    <section class="dark-card client-summary-card">
+        <div class="client-summary-header">
+            <div>
+                <h2 class="client-name" th:text="${assignment.client.fullName}">Client Name</h2>
+                <p class="client-subtitle">
+                    Active coaching relationship
+                </p>
+            </div>
+
+            <div class="status-pill"
+                 th:classappend="${assignment.status} == 'ACTIVE' ? ' status-active' : ' status-other'">
+                <span th:text="${assignment.status}">STATUS</span>
+            </div>
+        </div>
+
+        <div class="client-note-block">
+            <p class="label">Client Note</p>
+            <p class="client-note-text"
+               th:text="${assignment.clientNoteToTrainer} ?: 'No initial note from the client.'">
+                No initial note from the client.
+            </p>
+        </div>
+    </section>
+
+    <!-- Две колони: програма + бързи действия -->
+    <section class="client-main-grid">
+
+        <!-- Колона: тренирoвъчна програма -->
+        <div class="dark-card program-card">
+            <div class="program-card-header">
+                <h3>Training Program</h3>
+                <p class="muted">
+                    This text will appear in the client dashboard as their current plan.
+                </p>
+            </div>
+
+            <form th:action="@{'/trainer/client/' + ${assignment.id} + '/program'}"
+                  method="post" class="program-form">
+
+                <label for="programText" class="label">Program details</label>
+                <textarea id="programText"
+                          name="programText"
+                          class="program-textarea"
+                          rows="10"
+                          placeholder="Example:&#10;Day 1 – Upper body (Push)&#10;Day 2 – Lower body&#10;Day 3 – Rest&#10;Day 4 – Upper body (Pull)&#10;Day 5 – Legs + Core"
+                          th:text="${assignment.programText}"></textarea>
+
+                <div class="program-actions">
+                    <button class="btn neon" type="submit">Save Program</button>
+                    <span class="autosave-hint">Tip: update this weekly based on client progress.</span>
+                </div>
+            </form>
+        </div>
+
+        <!-- Колона: допълнителни действия / инфо -->
+        <aside class="dark-card side-card">
+            <h3>Progress & Extras</h3>
+            <p class="muted">
+                Track how your client looks over time and adjust the plan accordingly.
+            </p>
+
+            <a class="btn neon full-width"
+               th:href="@{'/trainer/client/' + ${assignment.id} + '/photos'}">
+                View Progress Photos
+            </a>
+
+            <div class="side-hints">
+                <p class="hint-title">Coach tips</p>
+                <ul>
+                    <li>Keep notes about changes directly in the program text.</li>
+                    <li>Align training frequency with the client’s schedule.</li>
+                    <li>Use the chat to clarify details and motivation.</li>
+                </ul>
+            </div>
+        </aside>
+
+    </section>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head('Вход клиент')"></head>
+<body class="page-bg">
+
+
+<section class="center-card">
+    <div class="form-card">
+        <h2>Вход на клиент</h2>
+        <form th:action="@{/client/login}" method="post">
+            <label>Имейл</label>
+            <input class="input" name="email" type="email" required/>
+            <label>Парола</label>
+            <input class="input" name="password" type="password" required/>
+            <div th:if="${error}" class="muted" style="color: red" th:text="${error}"></div>
+            <button class="btn-primary fullwidth" type="submit">Вход</button>
+        </form>
+    </div>
+</section>
+</body>
+</html>

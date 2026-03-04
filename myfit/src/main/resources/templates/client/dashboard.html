@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head('Client Dashboard')}"></head>
+<body class="dark-body">
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="dashboard-container">
+    <h1 class="main-title">Welcome, <span th:text="${client.fullName}"></span></h1>
+
+    <div class="dark-card">
+        <h3>Your Trainer:</h3>
+
+        <!-- No trainer yet -->
+        <div th:if="${assignments.isEmpty()}">
+            <p>No trainer assigned yet.</p>
+        </div>
+
+        <!-- Has trainer request -->
+        <div th:if="${!assignments.isEmpty()}">
+
+            <p><strong>Status:</strong> <span th:text="${assignments[0].status}"></span></p>
+
+            <!-- Waiting approval -->
+            <div th:if="${assignments[0].status != 'ACTIVE'}">
+                <p>Your trainer is reviewing your request...</p>
+            </div>
+
+            <!-- ACTIVE Trainer -->
+            <div th:if="${assignments[0].status == 'ACTIVE'}">
+
+                <h3>Your Workout Program:</h3>
+                <pre th:text="${assignments[0].programText}"
+                     style="white-space: pre-wrap; padding: 10px;"></pre>
+
+                <!-- ✅ CHAT BUTTON -->
+                <a th:href="@{|/client/chat?clientId=${client.id}|}" class="btn neon" style="margin-top:10px;">
+                    💬 Open Chat With Trainer
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ✅ Upload Progress Photo -->
+    <form action="/client/upload-photo" method="post" enctype="multipart/form-data" style="margin-top:20px;">
+        <input type="hidden" name="clientId" th:value="${client.id}">
+        <input type="file" name="file" accept="image/*" required>
+        <button class="btn neon" type="submit">Upload Progress Photo</button>
+    </form>
+
+    <!-- ✅ Photo Gallery -->
+    <div style="margin-top:20px;">
+        <h3>Your Progress Photos</h3>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <img th:each="photo : ${client.photos}"
+                 th:src="${photo.filePath}"
+                 style="width:200px; border-radius:10px;">
+        </div>
+    </div>
+</div>
+</body>
+</html>
