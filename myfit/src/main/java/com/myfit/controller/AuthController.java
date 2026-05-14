@@ -21,8 +21,8 @@ public class AuthController {
     public String landing(Model model) {
 
         long activeClients = clientService.countClients();
-        long onlineTrainers = trainerService.countTrainers();   // 🔥 реален брой треньори
-        double averageRating = 4.9;                             // по-късно може да стане реално
+        long onlineTrainers = trainerService.countTrainers();
+        double averageRating = 4.9;
 
         model.addAttribute("activeClients", activeClients);
         model.addAttribute("onlineTrainers", onlineTrainers);
