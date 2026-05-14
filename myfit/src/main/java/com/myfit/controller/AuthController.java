@@ -28,7 +28,7 @@ public class AuthController {
         model.addAttribute("onlineTrainers", onlineTrainers);
         model.addAttribute("averageRating", averageRating);
 
-        return "auth/login-hub";  // или "landing.html" ако твоят landing е друг файл
+        return "auth/login-hub";
     }
 
     @GetMapping("/login/manager")

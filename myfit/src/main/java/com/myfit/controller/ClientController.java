@@ -42,7 +42,6 @@ public class ClientController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    // ✅ Register
     @GetMapping("/register")
     public String registerForm() {
         return "client/register";
@@ -68,7 +67,6 @@ public class ClientController {
         return "redirect:/client/questionnaire?clientId=" + c.getId();
     }
 
-    // ✅ Questionnaire
     @GetMapping("/questionnaire")
     public String questionnaire(@RequestParam Long clientId, Model model) {
         model.addAttribute("clientId", clientId);
@@ -98,7 +96,7 @@ public class ClientController {
         return "redirect:/client/choose?clientId=" + clientId;
     }
 
-    // ✅ Choose Trainer
+
     @GetMapping("/choose")
     public String chooseTrainer(@RequestParam Long clientId, Model model) {
         model.addAttribute("clientId", clientId);
@@ -138,7 +136,6 @@ public class ClientController {
         return "client/dashboard";
     }
 
-    // ✅ Upload Progress Photo
     @PostMapping("/upload-photo")
     public String uploadPhoto(
             @RequestParam Long clientId,
@@ -161,7 +158,6 @@ public class ClientController {
         return "redirect:/client/dashboard?clientId=" + clientId;
     }
 
-    // ✅ CHAT — Client View
     @GetMapping("/chat")
     public String clientChat(@RequestParam Long clientId, Model model) {
         Client client = clientService.getById(clientId);

@@ -23,30 +23,25 @@ public class RedirectController {
 
         String email = auth.getName();
 
-        // ✅ Manager
+
         if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_MANAGER"))) {
             return "redirect:/manager/dashboard";
         }
 
-        // ✅ Trainer
         if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_TRAINER"))) {
             return "redirect:/trainer/dashboard";
         }
 
-        // ✅ Client logic
         Client c = clientService.getByEmail(email);
 
-        // няма попълнен въпросник
         if (c.getQuestionnaire() == null) {
             return "redirect:/client/questionnaire?clientId=" + c.getId();
         }
 
-        // няма избран треньор
         if (assignmentService.getAssignmentsByClientId(c.getId()).isEmpty()) {
             return "redirect:/client/choose?clientId=" + c.getId();
         }
 
-        // иначе → dashboard
         return "redirect:/client/dashboard?clientId=" + c.getId();
     }
 }

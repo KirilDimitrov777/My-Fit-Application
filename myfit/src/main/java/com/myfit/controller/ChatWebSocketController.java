@@ -13,7 +13,7 @@ public class ChatWebSocketController {
     @MessageMapping("/sendMessage")
     @SendTo("/topic/messages")
     public Message broadcast(Message message) {
-        // ако няма setter го добави в Message
+
         message.setTimestamp(LocalDateTime.now());
         return message;
     }

@@ -6,7 +6,7 @@
 <main class="page-shell">
     <h1 class="page-title">Trainer Management System</h1>
 
-    <!-- Търсачка -->
+    <!-- Search bar -->
     <div class="page-toolbar">
         <form method="get" th:action="@{/manager/dashboard}" class="search-inline">
             <input type="text" name="keyword" placeholder="Search by name or role..."
@@ -16,7 +16,6 @@
         </form>
 
         <div class="toolbar-right">
-            <!-- бутон, който само отваря модала за ADD -->
             <button type="button" id="openAddTrainer" class="btn neon-small">
                 + Add Trainer
             </button>
@@ -26,7 +25,6 @@
         </div>
     </div>
 
-    <!-- Таблица с треньори -->
     <section class="dark-card">
         <table class="table-clean">
             <thead>
@@ -51,10 +49,10 @@
                 <td th:text="${t.salary}"></td>
                 <td th:text="${t.role}"></td>
                 <td class="table-actions">
-                    <!-- EDIT: отваря dashboard с попълнен trainer в модала -->
+
                     <a th:href="@{|/manager/edit/${t.id}|}" class="btn btn-outline-small">Edit</a>
 
-                    <!-- DELETE: извиква /manager/delete/{id} -->
+                    <!-- DELETE: Calls /manager/delete/{id} -->
                     <a th:href="@{|/manager/delete/${t.id}|}" class="btn danger-small"
                        onclick="return confirm('Remove this trainer?')">Delete</a>
                 </td>
@@ -63,7 +61,7 @@
         </table>
     </section>
 
-    <!-- Modal за ADD/EDIT Trainer -->
+
     <div id="addTrainerModal" class="modal-overlay" style="display:none;">
         <div class="modal-window">
             <h2 class="card-title"
@@ -72,7 +70,7 @@
             </h2>
 
             <form th:action="@{/manager/save}" method="post" class="form-grid">
-                <!-- ако редактираме – подаваме id -->
+
                 <input type="hidden" name="id" th:value="${trainer != null} ? ${trainer.id} : ''"/>
 
                 <input type="text" name="fullName" placeholder="Full Name"
@@ -113,7 +111,6 @@
     </div>
 </main>
 
-<!-- малко JS за модала (работи и за Add, и за Edit) -->
 <script th:inline="javascript">
     document.addEventListener('DOMContentLoaded', function () {
         const modal = document.getElementById('addTrainerModal');

@@ -31,7 +31,6 @@ public class ClientService {
         return clientRepository.findByEmail(email).orElseThrow();
     }
 
-    // 📌 ДОБАВЕНО: за статистиката
     public long countClients() {
         return clientRepository.count();
     }

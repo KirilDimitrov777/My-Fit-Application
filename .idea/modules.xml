@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/myfit.iml" filepath="$PROJECT_DIR$/.idea/myfit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/My-Fit-Application.iml" filepath="$PROJECT_DIR$/.idea/My-Fit-Application.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myfit/myfit.iml" filepath="$PROJECT_DIR$/myfit/myfit.iml" />
     </modules>
   </component>
 </project>

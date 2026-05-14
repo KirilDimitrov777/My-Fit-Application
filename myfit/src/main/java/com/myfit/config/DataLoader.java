@@ -50,7 +50,7 @@ public class DataLoader implements CommandLineRunner {
                     "Main Manager"
             );
             userService.save(manager);
-            System.out.println("✅ Created MANAGER: manager@myfit.com / manager1914");
+            System.out.println(" Created MANAGER: manager@myfit.com / manager1914");
         } else {
             System.out.println("ℹ MANAGER already exists.");
         }
@@ -65,7 +65,7 @@ public class DataLoader implements CommandLineRunner {
         }
 
         if (!trainerUserExists) {
-            // 1) създаваме User за треньора
+
             User trainerUser = new User(
                     "trainer1@myfit.com",
                     passwordEncoder.encode("trainer1914"),
@@ -74,7 +74,7 @@ public class DataLoader implements CommandLineRunner {
             );
             trainerUser = userService.save(trainerUser);
 
-            // 2) създаваме Trainer профил, за да се вижда в таблицата при мениджъра
+
             Trainer trainerProfile = new Trainer();
             trainerProfile.setFullName("Demo Trainer");
             trainerProfile.setEmail("trainer1@myfit.com");
@@ -86,7 +86,7 @@ public class DataLoader implements CommandLineRunner {
 
             trainerRepository.save(trainerProfile);
 
-            System.out.println("✅ Created TRAINER: trainer1@myfit.com / trainer1914");
+            System.out.println(" Created TRAINER: trainer1@myfit.com / trainer1914");
         } else {
             System.out.println("ℹ TRAINER already exists.");
         }

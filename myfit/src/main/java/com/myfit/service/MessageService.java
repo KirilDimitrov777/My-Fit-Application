@@ -17,17 +17,10 @@ public class MessageService {
         this.repo = repo;
     }
 
-    /**
-     * Връща чат историята между конкретен клиент и треньор,
-     * подредена по време.
-     */
     public List<Message> chat(Client client, Trainer trainer) {
         return repo.findByClientAndTrainerOrderByTimestampAsc(client, trainer);
     }
 
-    /**
-     * Записва съобщение в базата – ползва се и от WebSocket контролера.
-     */
     public void send(Message msg) {
         repo.save(msg);
     }

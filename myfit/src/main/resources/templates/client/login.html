@@ -6,14 +6,14 @@
 
 <section class="center-card">
     <div class="form-card">
-        <h2>Вход на клиент</h2>
+        <h2>Client Login</h2>
         <form th:action="@{/client/login}" method="post">
-            <label>Имейл</label>
+            <label>Email</label>
             <input class="input" name="email" type="email" required/>
-            <label>Парола</label>
+            <label>Password</label>
             <input class="input" name="password" type="password" required/>
             <div th:if="${error}" class="muted" style="color: red" th:text="${error}"></div>
-            <button class="btn-primary fullwidth" type="submit">Вход</button>
+            <button class="btn-primary fullwidth" type="submit">Continue</button>
         </form>
     </div>
 </section>

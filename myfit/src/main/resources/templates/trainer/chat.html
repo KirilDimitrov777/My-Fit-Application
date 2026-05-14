@@ -9,7 +9,7 @@
     <h1 class="page-title">Chat with Client</h1>
 
     <section class="dark-card">
-        <!-- История от базата -->
+
         <div id="chatBox" class="chat-box">
             <div th:each="m : ${messages}"
                  th:class="'msg ' + (${m.sender} == 'TRAINER' ? 'msg-right' : 'msg-left')">
@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <!-- Класическа POST форма (ползва /trainer/chat/send от TrainerController) -->
+
         <form th:action="@{/trainer/chat/send}" method="post"
               class="chat-input-row" style="display:flex;gap:10px;margin-top:10px;">
             <input type="hidden" name="assignmentId" th:value="${assignmentId}">
@@ -37,7 +37,7 @@
     </section>
 </main>
 
-<!-- Auto scroll до долу при отваряне -->
+
 <script th:inline="javascript">
     document.addEventListener('DOMContentLoaded', function () {
         const box = document.getElementById('chatBox');

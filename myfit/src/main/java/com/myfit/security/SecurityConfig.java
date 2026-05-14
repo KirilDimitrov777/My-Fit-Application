@@ -41,7 +41,7 @@ public class SecurityConfig {
                 )
                 .formLogin(login -> login
                         .loginPage("/").permitAll()
-                        .loginProcessingUrl("/perform-login") // ✅ важно
+                        .loginProcessingUrl("/perform-login")
                         .usernameParameter("username")
                         .passwordParameter("password")
                         .defaultSuccessUrl("/redirect-after-login", true)

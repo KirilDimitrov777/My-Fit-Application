@@ -33,7 +33,7 @@
                 <pre th:text="${assignments[0].programText}"
                      style="white-space: pre-wrap; padding: 10px;"></pre>
 
-                <!-- ✅ CHAT BUTTON -->
+                <!-- CHAT BUTTON -->
                 <a th:href="@{|/client/chat?clientId=${client.id}|}" class="btn neon" style="margin-top:10px;">
                     💬 Open Chat With Trainer
                 </a>
@@ -42,14 +42,14 @@
         </div>
     </div>
 
-    <!-- ✅ Upload Progress Photo -->
+    <!-- Upload Progress Photo -->
     <form action="/client/upload-photo" method="post" enctype="multipart/form-data" style="margin-top:20px;">
         <input type="hidden" name="clientId" th:value="${client.id}">
         <input type="file" name="file" accept="image/*" required>
         <button class="btn neon" type="submit">Upload Progress Photo</button>
     </form>
 
-    <!-- ✅ Photo Gallery -->
+    <!-- Photo Gallery -->
     <div style="margin-top:20px;">
         <h3>Your Progress Photos</h3>
         <div style="display:flex; gap:10px; flex-wrap:wrap;">

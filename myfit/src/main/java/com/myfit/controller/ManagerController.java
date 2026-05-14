@@ -23,20 +23,17 @@ public class ManagerController {
         this.assignmentService = assignmentService;
     }
 
-    // LIST + SEARCH
     @GetMapping("/dashboard")
     public String dashboard(@RequestParam(required = false) String keyword, Model model) {
 
         model.addAttribute("trainers", trainerService.search(keyword));
         model.addAttribute("keyword", keyword == null ? "" : keyword);
 
-        // по подразбиране няма избран треньор за редакция
         model.addAttribute("trainer", null);
 
         return "manager/dashboard";
     }
 
-    // ОТВАРЯМЕ dashboard, но с попълнен trainer в модала (EDIT)
     @GetMapping("/edit/{id}")
     public String editTrainer(@PathVariable Long id,
                               @RequestParam(required = false) String keyword,
@@ -51,20 +48,16 @@ public class ManagerController {
         return "manager/dashboard";
     }
 
-    // SAVE – ползва се и за Add, и за Edit (ако има id -> update)
     @PostMapping("/save")
     public String saveTrainer(@ModelAttribute Trainer trainer) {
         trainerService.saveTrainer(trainer); // repo.save() -> insert или update
         return "redirect:/manager/dashboard";
     }
 
-    // DELETE един треньор + всички негови assignment-и
     @GetMapping("/delete/{id}")
     public String deleteTrainer(@PathVariable Long id) {
         Trainer trainer = trainerService.getById(id);
 
-        // премахваме всички връзки client-trainer за този треньор,
-        // за да не гърми foreign key в базата
         List<TrainerAssignment> assignments = assignmentService.getAssignmentsForTrainer(trainer);
         for (TrainerAssignment a : assignments) {
             assignmentService.removeClient(a.getId());
@@ -74,12 +67,11 @@ public class ManagerController {
         return "redirect:/manager/dashboard";
     }
 
-    // DELETE всички треньори + техните assignment-и
     @GetMapping("/delete-all")
     public String deleteAll() {
         List<Trainer> trainers = trainerService.getAllTrainers();
 
-        // първо махаме всички assignment-и за всички треньори
+
         for (Trainer t : trainers) {
             List<TrainerAssignment> assignments = assignmentService.getAssignmentsForTrainer(t);
             for (TrainerAssignment a : assignments) {

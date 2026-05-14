@@ -19,7 +19,6 @@ public class TrainerService {
         return trainerRepository.findAll();
     }
 
-    // 🔥 НОВО — връща броя треньори
     public long countTrainers() {
         return trainerRepository.count();
     }

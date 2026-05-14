@@ -76,7 +76,7 @@ public class TrainerController {
         return "trainer/client-photos";
     }
 
-    // ✅ CHAT — Trainer View
+    // CHAT — Trainer View
     @GetMapping("/chat/{assignmentId}")
     public String trainerChat(@PathVariable Long assignmentId, Model model) {
         TrainerAssignment a = assignmentService.getById(assignmentId);
